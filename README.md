@@ -11,7 +11,7 @@ It is also a good place to gather information, which means: I can collect inform
 
 ## Requirement
 
-**PTT-Crawler** is using BeautifulSoup4, requests, html.parser to gather post from PTT, then it will restore those posts into JSON files.
+**PTT-Crawler** is build by **Python 3** and using BeautifulSoup4, requests, html.parser to gather post from PTT, then it will restore those posts into JSON files.
 
 Make sure you already have **BeautifulSoup4**, **requests**, or you can use pip to instal them.
 ```s
@@ -25,6 +25,12 @@ pip install BeautifulSoup4
 You need to determine which board and how many index page you want to gather.
 
 So, modify parameters named **board** and **index_num** to do this.
+
+Then, run the command in terminal:
+
+```s
+python PTT_Crawler.py
+```
 
 
 ## Output Data Format
