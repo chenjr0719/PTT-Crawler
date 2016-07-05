@@ -11,7 +11,7 @@ It is also a good place to gather information, which means: I can collect inform
 
 ## Requirement
 
-**PTT-Crawler** is build by **Python 3** and using BeautifulSoup4, requests, html.parser to gather post from PTT, then it will restore those posts into JSON files.
+**PTT-Crawler** is built by **Python 3** and using BeautifulSoup4, requests, html.parser to gather post from PTT, then it will restore those posts into JSON files.
 
 Make sure you already have **BeautifulSoup4**, **requests**, or you can use pip to instal them.
 ```s
