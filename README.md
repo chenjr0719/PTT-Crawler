@@ -37,6 +37,7 @@ python PTT_Crawler.py
 
 In .json file, article looks like:
 
+```s
 article = {
   'Board': board,
   'Article_Title': title,
@@ -48,9 +49,11 @@ article = {
   'Arrow_num': arrow_count,
   'Content': content
 }
+```
 
 And push is:
 
+```s
 push = {
   'Tag': push_tag,
   'User': push_user,
@@ -58,4 +61,4 @@ push = {
   'Content': push_content,
   'ID': article_id + '_' + str(push_id)
 }
-
+```
