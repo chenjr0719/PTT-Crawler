@@ -1,3 +1,46 @@
+##########################################################################################################
+#Read and set parameters.
+import argparse, sys
+parser = argparse.ArgumentParser()
+
+parser.add_argument("board", help="Set the board you want to crawling.")
+parser.add_argument("num", type = int, help="Set the number of index you want to crawling.")
+parser.add_argument("-d", "--dep", help="Install dependency module. Default is no.")
+parser.add_argument("-p", "--push", help="Collect pushes or not. Default is yes.")
+parser.add_argument("-s", "--stream", help="If yes, this crawler will turn to streaming mode.")
+
+args = parser.parse_args()
+
+board = str(args.board)
+index_num = int(args.num)
+
+if args.dep == 'yes':
+    import subprocess
+    dep = ['requests', 'BeautifulSoup4']
+    subprocess.call([sys.executable, '-m', 'pip', 'install'] + dep)
+elif not (args.dep == 'no' or args.dep == None):
+    print('--dep is not correct!\nPlease input yes or no.')    
+    sys.exit()
+
+if args.push == 'yes' or args.push == None:
+    push = True
+elif args.push == 'no':
+    push = None
+else:
+    print('--push is not correct!\nPlease input yes or no.')
+    sys.exit()
+
+if args.stream == 'yes':
+    stream = True
+elif args.stream == 'no' or args.stream == None:
+    stream = None
+else:
+    print('--stream is not correct!\nPlease input yes or no.')
+    sys.exit()
+
+##########################################################################################################
+#Import modules.
+
 import requests
 from bs4 import BeautifulSoup
 import html.parser
@@ -14,9 +57,6 @@ import time
 site_URL = 'https://www.ptt.cc'
 site_head = '/bbs/'
 site_foot = '/index.html'
-
-board = 'Gossiping'
-index_num = 2
 
 #Create a directory to restore the result.
 result_dir = 'Result/'
@@ -43,7 +83,8 @@ for index in range(0, index_num):
         next_index = soup.find_all('a',{'class':'btn wide'}, {'href': True})[1]
         next_index = str(next_index.get('href'))
         site_foot = '/index' + re.search(r"[0-9]+", next_index).group() + '.html'
-        print(site_foot)
+        if not stream:
+            print(site_foot)
 
     time.sleep(0.1)
 
@@ -68,7 +109,8 @@ for link in link_file:
     soup = BeautifulSoup(target.text.encode("utf-8"), "html.parser")
 
     article_id = link.split('/')[len(link.split('/')) - 1][:-6]
-    print(article_id)
+    if not stream:
+        print(article_id)
     if not os.path.exists(article_id):
         os.makedirs(article_id)
 
@@ -109,7 +151,11 @@ for link in link_file:
 
     push_position = soup.find_all('span', {'class': 'f2'})
     push_position = push_position[len(push_position) - 1]
-    push_list = push_position.find_all_next('div', {'class': 'push'})
+
+    if push:
+        push_list = push_position.find_all_next('div', {'class': 'push'})
+    else:
+        push_list = []
 
     push_count = 0
     bad_count = 0
@@ -152,6 +198,9 @@ for link in link_file:
             push_file.write(json.dumps(push, indent=4, sort_keys=True, ensure_ascii=False))
             push_file.close()
 
+            if stream:
+                print(json.dumps(push))
+
             push_id += 1
 
     #print('推: ' + str(push_count) + '\n噓: ' + str(bad_count) + '\n→: ' + str(arrow_count))
@@ -171,6 +220,9 @@ for link in link_file:
     article_file = open(article_id + '.json', 'w')
     article_file.write(json.dumps(article, indent=4, sort_keys=True, ensure_ascii=False))
     article_file.close()
+
+    if stream:
+        print(json.dumps(article))
 
     os.chdir('..')
     time.sleep(0.1)
