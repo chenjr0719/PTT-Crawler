@@ -32,7 +32,7 @@ python PTT_Crawler.py $BOARD $INDEX_NUM
 
 For example:
 
-```$
+```s
 python PTT_Crawler.py Gossiping 2
 ```
 
