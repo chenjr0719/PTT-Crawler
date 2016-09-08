@@ -24,14 +24,28 @@ pip install BeautifulSoup4
 
 You need to determine which board and how many index page you want to gather.
 
-So, modify parameters named **board** and **index_num** to do this.
-
-Then, run the command in terminal:
+Run the command in terminal:
 
 ```s
-python PTT_Crawler.py
+python PTT_Crawler.py $BOARD $INDEX_NUM
 ```
 
+For example:
+
+```$
+python PTT_Crawler.py Gossiping 2
+```
+
+### Arguments
+
+There are some atguments you can use:
+
+1. **-d, --dep**
+   Set this argument to yes will auto install requirement modules. Default is no.
+2. **-p, -push**
+   Set this argument to no, this crawler will not collect pushes. Default is yes.
+3. **-s, -stream**
+   This argument is used to turn on the streaming mode. Set yes to turn to streaming mode. Default is no.
 
 ## Output Data Format
 

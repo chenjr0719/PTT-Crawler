@@ -5,6 +5,7 @@ parser = argparse.ArgumentParser()
 
 parser.add_argument("board", help="Set the board you want to crawling.")
 parser.add_argument("num", type = int, help="Set the number of index you want to crawling.")
+
 parser.add_argument("-d", "--dep", help="Install dependency module. Default is no.")
 parser.add_argument("-p", "--push", help="Collect pushes or not. Default is yes.")
 parser.add_argument("-s", "--stream", help="If yes, this crawler will turn to streaming mode.")
