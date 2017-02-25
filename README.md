@@ -1,6 +1,6 @@
 # PTT-Crawler
 
-A Python Crawler Implement for PTT
+A Python Crawler Implement for PTT with **multi-processing**.
 
 ## What is PTT?
 
@@ -34,18 +34,13 @@ For example:
 
 ```s
 python PTT_Crawler.py Gossiping 2
+python PTT_Crawler.py Gossiping 2 -p no
 ```
 
 ### Arguments
 
-There are some atguments you can use:
-
-1. **-d, --dep**
-   Set this argument to yes will auto install requirement modules. Default is no.
-2. **-p, -push**
+* **-p, --push**
    Set this argument to no, this crawler will not collect pushes. Default is yes.
-3. **-s, -stream**
-   This argument is used to turn on the streaming mode. Set yes to turn to streaming mode. Default is no.
 
 ## Output Data Format
 
